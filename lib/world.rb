@@ -1,6 +1,6 @@
 require 'Matrix'
-require './cell'
-require './patterns'
+require './lib/cell'
+require './lib/patterns'
 
 class World
   include Patterns
@@ -24,7 +24,7 @@ class World
   end
 
   def print_board
-    puts self.board.to_a.collect { |row| row.collect { |cell| cell.to_s }.join(' ') }
+    self.board.to_a.collect { |row| row.collect { |cell| cell.to_s }.join(' ') }
   end
 
   private

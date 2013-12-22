@@ -1,4 +1,4 @@
-require './world'
+require './lib/world'
 
 class Game
   attr_reader :world
@@ -13,11 +13,8 @@ class Game
   end
 
   def play
-    10.times do 
-      @world.pass_time
-      @world.print_board
-      sleep 0.1
-    end
+    @world.pass_time
+    @world.print_board
   end
 
 end
