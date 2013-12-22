@@ -11,23 +11,20 @@ class World
     make_grid(dimensions[0], dimensions[1])
   end
 
-  def get_neighbors(cell)
+  def neighbors_count(cell)
     neighbors = self.board.collect do |other_cell|
         other_cell if neighboring?(cell, other_cell) && other_cell.alive?
     end
-    neighbors.to_a.flatten.compact
+    neighbors.to_a.flatten.compact.length
   end
 
   def pass_time
-    self.board.each { |cell| cell.act(get_neighbors(cell)) }
+    self.board.each { |cell| cell.act(neighbors_count(cell)) }
     self.board.each { |cell| cell.grow! }
   end
 
-  def print
-    self.board.to_a.each do |row|
-      puts row.collect { |cell| cell.to_s }.join(' ')
-    end
-    nil
+  def print_board
+    puts self.board.to_a.collect { |row| row.collect { |cell| cell.to_s }.join(' ') }
   end
 
   private

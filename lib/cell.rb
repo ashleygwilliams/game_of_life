@@ -15,10 +15,11 @@ class Cell
 
   def act(neighbors)
     if alive?
-      self.future = false if neighbors.length < 2 || neighbors.length < 3
+      self.future = false if neighbors < 2 || neighbors > 3
+      self.future = true if neighbors == 3 || neighbors == 2
     else
-      self.future = true if neighbors.length == 3
-    end 
+      self.future = true if neighbors == 3
+    end
   end
 
   def grow!
@@ -27,7 +28,7 @@ class Cell
   end
 
   def to_s
-    alive? ? "o" : "x"
+    self.alive? ? "o" : "x"
   end
 
 end

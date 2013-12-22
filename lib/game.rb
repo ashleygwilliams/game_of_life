@@ -1,6 +1,9 @@
-class Game
+require './world'
 
-  def initialize(board_dimensions=[10,10], initial_config=random)
+class Game
+  attr_reader :world
+
+  def initialize(board_dimensions=[10,10], initial_config=:random)
     @world = World.new(board_dimensions)
     seed(initial_config)
   end
@@ -10,8 +13,10 @@ class Game
   end
 
   def play
-    100.times do 
+    10.times do 
       @world.pass_time
+      @world.print_board
+      sleep 0.1
     end
   end
 
