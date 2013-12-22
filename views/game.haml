@@ -1,3 +1,7 @@
 - session[:game].world.print_board.each do |row|
   .row
-    = row
+    - row.split.each do |cell|
+      - if cell == "o"
+        .cell.alive
+      - else
+        .cell.dead
