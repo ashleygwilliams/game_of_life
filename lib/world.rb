@@ -1,7 +1,10 @@
 require 'Matrix'
 require './cell'
+require './patterns'
 
 class World
+  include Patterns
+
   attr_accessor :board
 
   def initialize(dimensions)
@@ -9,23 +12,22 @@ class World
   end
 
   def get_neighbors(cell)
-    neighbors = @board.collect do |other_cell|
-        other_cell if neighboring?(cell, other_cell)
+    neighbors = self.board.collect do |other_cell|
+        other_cell if neighboring?(cell, other_cell) && other_cell.alive?
     end
     neighbors.to_a.flatten.compact
   end
 
   def pass_time
-    @board.each do |cell|
-      cell.act(get_neighbors(cell))
-    end
-    @board.each { |cell| cell.grow! }
+    self.board.each { |cell| cell.act(get_neighbors(cell)) }
+    self.board.each { |cell| cell.grow! }
   end
 
   def print
-    @board.each do |cell|
-      puts cell.to_s
+    self.board.to_a.each do |row|
+      puts row.collect { |cell| cell.to_s }.join(' ')
     end
+    nil
   end
 
   private

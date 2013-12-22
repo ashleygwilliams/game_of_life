@@ -5,10 +5,14 @@ class Game
     seed(initial_config)
   end
 
-  def seed
+  def seed(config)
+    @world.send(config)
   end
 
   def play
+    100.times do 
+      @world.pass_time
+    end
   end
 
 end

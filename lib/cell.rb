@@ -1,5 +1,6 @@
 class Cell
-  attr_accessor :x, :y
+  attr_accessor :x, :y, :future
+  attr_writer :alive
 
   def initialize(x,y)
     @x = x
@@ -13,20 +14,20 @@ class Cell
   end
 
   def act(neighbors)
-    if @alive
-      @future = false if neighbors.length < 2 || neighbors.length < 3
+    if alive?
+      self.future = false if neighbors.length < 2 || neighbors.length < 3
     else
-      @future = true if neighbors.length == 3
+      self.future = true if neighbors.length == 3
     end 
   end
 
   def grow!
-    @alive = @future
-    @future = nil
+    self.alive = self.future
+    self.future = nil
   end
 
   def to_s
-    @alive ? "o" : "x"
+    alive? ? "o" : "x"
   end
 
 end
